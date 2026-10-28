@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · Sales Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script>
+    try { document.documentElement.dataset.theme = localStorage.getItem("theme") || "light"; } catch (e) {}
+  </script>
+</head>
+<body class="auth-body">
+  <main class="auth-wrap">
+    <section class="auth-hero">
+      <div class="brand brand-lg"><span class="brand-mark">₹</span> SalesPulse</div>
+      <h1>Know your numbers,<br>every single day.</h1>
+      <p>Track revenue, profit and orders across regions, categories and channels, all in rupees.</p>
+      <ul class="auth-points">
+        <li>Live KPIs with period comparison</li>
+        <li>Trend charts with a 3-month forecast</li>
+        <li>Auto-generated business insights</li>
+      </ul>
+    </section>
+
+    <section class="auth-card">
+      <h2>Welcome back</h2>
+      <p class="muted">Sign in to open your dashboard.</p>
+
+      {% if error %}
+        <div class="alert" role="alert">{{ error }}</div>
+      {% endif %}
+
+      <form method="post" autocomplete="on">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" placeholder="admin" required autofocus autocomplete="username">
+
+        <label for="password">Password</label>
+        <div class="pw-field">
+          <input id="password" name="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+          <button type="button" class="pw-toggle" id="pwToggle" aria-label="Show password">Show</button>
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+      <p class="hint">Demo login: <code>admin</code> / <code>admin123</code></p>
+    </section>
+  </main>
+
+  <script>
+    const pw = document.getElementById("password");
+    const toggle = document.getElementById("pwToggle");
+    toggle.addEventListener("click", () => {
+      const show = pw.type === "password";
+      pw.type = show ? "text" : "password";
+      toggle.textContent = show ? "Hide" : "Show";
+    });
+  </script>
+</body>
+</html>
